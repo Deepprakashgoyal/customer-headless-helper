@@ -1,4 +1,4 @@
-# Woo Headless Helper
+# Customer Headless Helper
 
 ![License](https://img.shields.io/badge/license-GPL--2.0%2B-blue.svg)
 ![PHP Version](https://img.shields.io/badge/PHP-5.6%2B-blue.svg)
