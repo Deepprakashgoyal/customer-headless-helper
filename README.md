@@ -31,7 +31,7 @@ This plugin allows customers to access their own orders and customer data, creat
 
 ## Installation
 
-1. Download the plugin files and upload them to your `/wp-content/plugins/woo-headless-helper` directory
+1. Download the plugin files and upload them to your `/wp-content/plugins/customer-headless-helper` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress admin dashboard
 3. Download and activate the [JWT Authentication for WP-API](https://wordpress.org/plugins/jwt-authentication-for-wp-rest-api/)
 4. Configure your JWT secret key in WordPress configuration

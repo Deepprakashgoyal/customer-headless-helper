@@ -1,4 +1,4 @@
-=== Woo Headless Helper ===
+=== Customer Headless Helper ===
 Contributors: deepprakashgoyal
 Tags: headless-cms, jwt-woocommerce, jwt-authentication, woocommerce, rest-api
 Requires at least: 4.7
@@ -43,7 +43,7 @@ To use the plugin, you must send a JWT token in the Authorization header of your
 
 == Installation ==
 
-1. Upload the plugin files to the `/wp-content/plugins/woo-headless-helper` directory
+1. Upload the plugin files to the `/wp-content/plugins/customer-headless-helper` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Download and activate the [JWT Authentication for WP-API](https://wordpress.org/plugins/jwt-authentication-for-wp-rest-api/)
 4. Configure your JWT secret key in WordPress configuration
@@ -78,7 +78,7 @@ Yes, this plugin is framework-agnostic and can work with any frontend implementa
 == Upgrade Notice ==
 
 = 1.0.0 =
-Initial release of Woo Headless Helper.
+Initial release of Customer Headless Helper.
 
 == Credits ==
 

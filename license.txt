@@ -1,4 +1,4 @@
-SEO Header Footer Code - A plugin to add custom code in header, footer, body for posts, pages or global
+Customer Headless Helper - A Custom plugin for headless WooCommerce setups, enabling customers to get orders, account detail, create orders, reset passwords, and registration via the REST API.
 
 Copyright 2014-2018 by the contributors
 

@@ -1,10 +1,10 @@
 <?php
 
-function whh_orders_callback( $request ) {
+function chh_orders_callback( $request ) {
     // Get the current user ID
     $user_id = get_current_user_id();
     if ( ! $user_id ) {
-        return new WP_Error( 'rest_not_logged_in', __( 'You are not currently logged in.' ), array( 'status' => 401 ) );
+        return new WP_Error( 'rest_not_logged_in', 'You are not currently logged in.', array( 'status' => 401 ) );
     }
 
     // Get the orders for the current user
@@ -31,11 +31,11 @@ function whh_orders_callback( $request ) {
     return $response;
 }
 
-function whh_order_callback( $request ) {
+function chh_order_callback( $request ) {
     // Get the current user ID
     $user_id = get_current_user_id();
     if ( ! $user_id ) {
-        return new WP_Error( 'rest_not_logged_in', __( 'You are not currently logged in.' ), array( 'status' => 401 ) );
+        return new WP_Error( 'rest_not_logged_in',  'You are not currently logged in.' , array( 'status' => 401 ) );
     }
 
     // Get the order ID from the request
@@ -63,11 +63,11 @@ function whh_order_callback( $request ) {
     
 }
 
-function whh_customer_callback( $request ) {
+function chh_customer_callback( $request ) {
     // Get the current user ID
     $user_id = get_current_user_id();
     if ( ! $user_id ) {
-        return new WP_Error( 'rest_not_logged_in', __( 'You are not currently logged in.' ), array( 'status' => 401 ) );
+        return new WP_Error( 'rest_not_logged_in',  'You are not currently logged in.' , array( 'status' => 401 ) );
     }
 
     // Get the customer data for the current user
@@ -106,7 +106,7 @@ function whh_customer_callback( $request ) {
     );
 }
 
-function whh_customer_authentication( $user, $token, $auth_data ) {
+function chh_customer_authentication( $user, $token, $auth_data ) {
     // Validate the JWT token
     try {
         // Decode the token and get the user data
@@ -114,13 +114,13 @@ function whh_customer_authentication( $user, $token, $auth_data ) {
         $user_id = $decoded_token->data->user->id;
     } catch ( Exception $e ) {
         // Return an error if the token is not valid
-        return new WP_Error( 'rest_invalid_token', __( 'Invalid JWT token.' ), array( 'status' => 401 ) );
+        return new WP_Error( 'rest_invalid_token',  'Invalid JWT token.' , array( 'status' => 401 ) );
     }
 
     // Check if the user exists
     $user = get_user_by( 'id', $user_id );
     if ( ! $user ) {
-        return new WP_Error( 'rest_user_invalid', __( 'Invalid user.' ), array( 'status' => 401 ) );
+        return new WP_Error( 'rest_user_invalid',  'Invalid user.' , array( 'status' => 401 ) );
     }
 
     // Return the user object
@@ -128,18 +128,18 @@ function whh_customer_authentication( $user, $token, $auth_data ) {
 }
 
 // create order endpoint
-function whh_create_order_callback( $request ) {
+function chh_create_order_callback( $request ) {
     // Get the current user ID
     $user_id = get_current_user_id();
     if ( ! $user_id ) {
-        return new WP_Error( 'rest_not_logged_in', __( 'You are not currently logged in.' ), array( 'status' => 401 ) );
+        return new WP_Error( 'rest_not_logged_in',  'You are not currently logged in.' , array( 'status' => 401 ) );
     }
 
     // Get the order data from the request
     $order_data = $request->get_json_params();
 
     if( ! isset( $order_data['line_items'] ) || empty( $order_data['line_items'] ) ) {
-        return new WP_Error( 'rest_invalid_order', __( 'Invalid order data.' ), array( 'status' => 400 ) );
+        return new WP_Error( 'rest_invalid_order',  'Invalid order data.' , array( 'status' => 400 ) );
     }
 
     // Create a new order
@@ -224,11 +224,11 @@ function whh_create_order_callback( $request ) {
 }
 
 // register customer endpoint
-function whh_register_customer_callback($request) {
+function chh_register_customer_callback($request) {
     $params = $request->get_json_params();
 
     if (!isset($params['email']) || !isset($params['password'])) {
-        return new WP_Error('missing_fields', 'Email and password are required.', ['status' => 400]);
+        return new WP_Error('missing_fields',  'Email and password are required.', ['status' => 400]);
     }
 
     $email = sanitize_email($params['email']);
@@ -236,7 +236,7 @@ function whh_register_customer_callback($request) {
     $username = isset($params['username']) ? sanitize_user($params['username']) : $email;
 
     if (email_exists($email)) {
-        return new WP_Error('email_exists', 'Email is already registered.', ['status' => 400]);
+        return new WP_Error('email_exists',  'Email is already registered.', ['status' => 400]);
     }
 
     $user_id = wp_create_user($username, $password, $email);
@@ -256,18 +256,18 @@ function whh_register_customer_callback($request) {
 }
 
 // reset password
-function whh_reset_password_callback($request) {
+function chh_reset_password_callback($request) {
     $params = $request->get_json_params();
 
     if (!isset($params['email'])) {
-        return new WP_Error('missing_email', 'Email is required.', ['status' => 400]);
+        return new WP_Error('missing_email',  'Email is required.', ['status' => 400]);
     }
 
     $email = sanitize_email($params['email']);
     $user = get_user_by('email', $email);
 
     if (!$user) {
-        return new WP_Error('invalid_email', 'No user found with this email.', ['status' => 404]);
+        return new WP_Error('invalid_email',  'No user found with this email.', ['status' => 404]);
     }
 
     // Generate a reset password link
